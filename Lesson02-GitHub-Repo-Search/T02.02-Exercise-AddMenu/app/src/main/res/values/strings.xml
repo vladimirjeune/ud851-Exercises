@@ -17,4 +17,5 @@
     <string name="app_name">Github Query</string>
     <!--TODOne (1) Add a string resource called search with the title "Search"-->
     <string name="search">Search</string>
+    <string name="toast_note">You are now searching</string>
 </resources>
