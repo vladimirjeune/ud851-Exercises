@@ -84,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
             return retVal;
         }
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mSearchResultsTextView.setText(s);
+        }
 
     }
 
