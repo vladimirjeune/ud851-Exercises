@@ -16,6 +16,7 @@
 package com.example.android.recyclerview;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -49,7 +50,15 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
 
     @Override
     public NumberViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NumberViewHolder(parent);
+
+        // Can call LayoutInflater from here
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+
+        View view = layoutInflater.inflate(R.layout.number_list_item
+                , parent, false);   // F is so it does not attach to parent immediately
+
+        return new NumberViewHolder(view);
+
     }
 
     // TODOne (7) Override onBindViewHolder
