@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,9 +77,17 @@ public class MainActivity extends AppCompatActivity {
     // TODOne (6) Set app:showAsAction to ifRoom to display the menu item in the ActionBar if there is room
 
 
-    // TODO (7) Override onCreateOptionsMenu
-    // TODO (8) Use getMenuInflater().inflate to inflate the menu
-    // TODO (9) Return true to display this menu
+    // TODOne (7) Override onCreateOptionsMenu
+    // TODOne (8) Use getMenuInflater().inflate to inflate the menu
+    // TODOne (9) Return true to display this menu
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
+    }
+
 
     // TODO (10) Override onOptionsItemSelected
     // TODO (11) Within this method, get the ID from the MenuItem
