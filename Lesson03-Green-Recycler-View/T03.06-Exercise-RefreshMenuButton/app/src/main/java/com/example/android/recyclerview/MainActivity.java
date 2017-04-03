@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
         mNumbersList.setAdapter(mAdapter);
     }
 
-    // TODO (2) Create a menu resource in res/menu/ called main.xml
-    // TODO (3) Add one item to the menu with an ID of action_refresh
-    // TODO (4) Set the title of the menu item to "Refresh" using strings.xml
-    // TODO (5) Set the orderInCategory value to 1 to make sure this item is the first in the list
-    // TODO (6) Set app:showAsAction to ifRoom to display the menu item in the ActionBar if there is room
+    // TODOne (2) Create a menu resource in res/menu/ called main.xml
+    // TODOne (3) Add one item to the menu with an ID of action_refresh
+    // TODOne (4) Set the title of the menu item to "Refresh" using strings.xml
+    // TODOne (5) Set the orderInCategory value to 1 to make sure this item is the first in the list
+    // TODOne (6) Set app:showAsAction to ifRoom to display the menu item in the ActionBar if there is room
 
 
     // TODO (7) Override onCreateOptionsMenu
