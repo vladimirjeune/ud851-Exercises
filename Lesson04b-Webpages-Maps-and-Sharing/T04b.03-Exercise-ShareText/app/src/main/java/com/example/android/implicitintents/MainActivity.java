@@ -150,12 +150,12 @@ public class MainActivity extends AppCompatActivity {
         String title = "Share and Share Alike!!!";
 
         // TODOne (4) Use ShareCompat.IntentBuilder to build the Intent and start the chooser
-        Intent shareIntent = ShareCompat.IntentBuilder
+        ShareCompat.IntentBuilder
                 .from(this)
                 .setChooserTitle(title)
                 .setType(mimeType)
                 .setText(aText)
-                .getIntent();  // This is like build in the Builder pattern
+                .startChooser();
     }
 
 }
