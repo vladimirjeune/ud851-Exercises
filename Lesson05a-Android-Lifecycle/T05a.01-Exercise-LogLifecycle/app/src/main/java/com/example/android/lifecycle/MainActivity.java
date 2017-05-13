@@ -47,20 +47,60 @@ public class MainActivity extends AppCompatActivity {
 
         mLifecycleDisplay = (TextView) findViewById(R.id.tv_lifecycle_events_display);
 
-        // TODO (1) Use logAndAppend within onCreate
+        // TODOne (1) Use logAndAppend within onCreate
+        logAndAppend(ON_CREATE);
     }
 
-    // TODO (2) Override onStart, call super.onStart, and call logAndAppend with ON_START
+    // TODOne (2) Override onStart, call super.onStart, and call logAndAppend with ON_START
 
-    // TODO (3) Override onResume, call super.onResume, and call logAndAppend with ON_RESUME
+    /**
+     * ONSTART - makes the activity visible to the user, as the app prepares for the activity to enter the foreground
+     * and become interactive. For example, this method is where the app initializes the code that maintains
+     * the UI. It might also register a BroadcastReceiver that monitors changes that are reflected in the UI.
+     *
+     * The onStart() method completes very quickly and, as with the Created state, the activity does not stay
+     * resident in the Started state. Once this callback finishes, the activity enters the Resumed state, and
+     * the system invokes the onResume() method.
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        logAndAppend(ON_START);
+    }
 
-    // TODO (4) Override onPause, call super.onPause, and call logAndAppend with ON_PAUSE
 
-    // TODO (5) Override onStop, call super.onStop, and call logAndAppend with ON_STOP
+    // TODOne (3) Override onResume, call super.onResume, and call logAndAppend with ON_RESUME
+    @Override
+    protected void onResume() {
+        super.onResume();
+        logAndAppend(ON_RESUME);
+    }
 
-    // TODO (6) Override onRestart, call super.onRestart, and call logAndAppend with ON_RESTART
 
-    // TODO (7) Override onDestroy, call super.onDestroy, and call logAndAppend with ON_DESTROY
+    // TODOne (4) Override onPause, call super.onPause, and call logAndAppend with ON_PAUSE
+    @Override
+    protected void onPause() {
+        super.onPause();
+        logAndAppend(ON_PAUSE);
+    }
+
+
+    // TODOne (5) Override onStop, call super.onStop, and call logAndAppend with ON_STOP
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        logAndAppend(ON_STOP);
+    }
+
+    // TODOne (6) Override onRestart, call super.onRestart, and call logAndAppend with ON_RESTART
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        logAndAppend(ON_RESTART);
+    }
+
+    // TODOne (7) Override onDestroy, call super.onDestroy, and call logAndAppend with ON_DESTROY
     /**
      * The final call you receive before your activity is destroyed. This can happen either because
      * the activity is finishing (someone called finish() on it, or because the system is
