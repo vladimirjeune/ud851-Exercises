@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
             // TODOne (1) Create a String member variable called mGithubJson that will store the raw JSON
-            String mGithubJson =  mSearchResultsTextView.getText().toString();
+            String mGithubJson ;
 
             @Override
             protected void onStartLoading() {
