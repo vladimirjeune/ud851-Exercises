@@ -20,6 +20,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.example.com.visualizerpreferences.AudioVisuals.AudioInputReader;
 import android.example.com.visualizerpreferences.AudioVisuals.VisualizerView;
 import android.os.Build;
@@ -51,8 +52,15 @@ public class VisualizerActivity extends AppCompatActivity {
     private void setupSharedPreferences() {
         // Get all of the values from shared preferences to set it up
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        // TODO (4) Use resources here instead of the hard coded string and boolean
-        mVisualizerView.setShowBass(sharedPreferences.getBoolean("show_bass", true));
+        // TODOne (4) Use resources here instead of the hard coded string and boolean
+        Resources res = getResources();
+
+        mVisualizerView.setShowBass(
+                sharedPreferences.getBoolean(
+                        res.getString(R.string.pref_checkbox_key),
+                        res.getBoolean(R.bool.pref_checkbox_default_value)
+                ));
+
         mVisualizerView.setShowMid(true);
         mVisualizerView.setShowTreble(true);
         mVisualizerView.setMinSizeScale(1);
