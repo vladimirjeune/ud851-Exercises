@@ -29,7 +29,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,9 +70,9 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
     // TODO (4) Override onDestroy and unregister the listener
     @Override
     protected void onDestroy() {
+        super.onDestroy();  // Do the super first
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
-        super.onDestroy();
     }
 
     /**
