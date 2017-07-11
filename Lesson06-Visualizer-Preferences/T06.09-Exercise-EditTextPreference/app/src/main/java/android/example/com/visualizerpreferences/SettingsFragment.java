@@ -25,6 +25,9 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat implements
@@ -47,6 +50,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             // they are already set up in xml using summaryOff and summary On
             if (!(p instanceof CheckBoxPreference)) {
                 String value = sharedPreferences.getString(p.getKey(), "");
+                Log.d(TAG, "onCreatePreferences: [" + value.trim() + "]");
                 setPreferenceSummary(p, value);
             }
         }
@@ -60,6 +64,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             // Updates the summary for the preference
             if (!(preference instanceof CheckBoxPreference)) {
                 String value = sharedPreferences.getString(preference.getKey(), "");
+                Log.d(TAG, "onSharedPreferenceChanged: [" + value.trim() + "]");
                 setPreferenceSummary(preference, value);
             }
         }
@@ -83,8 +88,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             }
         } else if (preference instanceof EditTextPreference) {
             EditTextPreference editTextPreference = (EditTextPreference) preference;
-
-            editTextPreference.setSummary(editTextPreference.getText());  // Set summary to value stored
+            Log.d(TAG, "setPreferenceSummary: [" + value.trim() + "]");
+            editTextPreference.setSummary(value);  // Set summary to value stored
         }
     }
     

@@ -60,12 +60,16 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
                 getResources().getBoolean(R.bool.pref_show_treble_default)));
 
-        String sizeNumber = sharedPreferences.getString(getString(R.string.pref_size_key),
-                getResources().getString(R.string.pref_size_default));
-        mVisualizerView.setMinSizeScale(getFloatValue(sizeNumber));
+        loadFromSharedPreferences(sharedPreferences);
         loadColorFromPreferences(sharedPreferences);
         // Register the listener
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    private void loadFromSharedPreferences(SharedPreferences sharedPreferences) {
+        String sizeNumber = sharedPreferences.getString(getString(R.string.pref_size_key),
+                getResources().getString(R.string.pref_size_default));
+        mVisualizerView.setMinSizeScale(getFloatValue(sizeNumber));
     }
 
     /**
@@ -100,8 +104,7 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         } else if (key.equals(getString(R.string.pref_color_key))) {
             loadColorFromPreferences(sharedPreferences);
         } else if (key.equals(R.string.pref_size_key)) {
-            String stringSize = sharedPreferences.getString(key, getResources().getString(R.string.pref_size_default));
-            mVisualizerView.setMinSizeScale(getFloatValue(stringSize));
+            loadFromSharedPreferences(sharedPreferences);
         }
     }
 
