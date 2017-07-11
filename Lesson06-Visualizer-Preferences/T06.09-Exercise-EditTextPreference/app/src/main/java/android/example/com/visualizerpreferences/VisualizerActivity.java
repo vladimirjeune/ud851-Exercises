@@ -59,10 +59,27 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
                 getResources().getBoolean(R.bool.pref_show_mid_range_default)));
         mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
                 getResources().getBoolean(R.bool.pref_show_treble_default)));
-        mVisualizerView.setMinSizeScale(1);
+
+        String sizeNumber = sharedPreferences.getString(getString(R.string.pref_size_key),
+                getResources().getString(R.string.pref_size_default));
+        mVisualizerView.setMinSizeScale(getFloatValue(sizeNumber));
         loadColorFromPreferences(sharedPreferences);
         // Register the listener
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    /**
+     * GETFLOATVALUE - returns the value of a String that is a number as a float.
+     * If it is null returns 0.0F, which is out of range for the values we want.
+     * @param sizeString
+     * @return Either the string entered as a float, or 0.0F
+     */
+    private float getFloatValue(String sizeString) {
+        if (sizeString != null) {
+            float numValue = Float.parseFloat(sizeString);
+            return numValue;
+        }
+        return 0.0F;
     }
 
     private void loadColorFromPreferences(SharedPreferences sharedPreferences) {
@@ -82,6 +99,9 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
             mVisualizerView.setShowTreble(sharedPreferences.getBoolean(key, getResources().getBoolean(R.bool.pref_show_treble_default)));
         } else if (key.equals(getString(R.string.pref_color_key))) {
             loadColorFromPreferences(sharedPreferences);
+        } else if (key.equals(R.string.pref_size_key)) {
+            String stringSize = sharedPreferences.getString(key, getResources().getString(R.string.pref_size_default));
+            mVisualizerView.setMinSizeScale(getFloatValue(stringSize));
         }
     }
 
