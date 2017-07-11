@@ -50,7 +50,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             // they are already set up in xml using summaryOff and summary On
             if (!(p instanceof CheckBoxPreference)) {
                 String value = sharedPreferences.getString(p.getKey(), "");
-                Log.d(TAG, "onCreatePreferences: [" + value.trim() + "]");
+
                 setPreferenceSummary(p, value);
             }
         }
@@ -64,7 +64,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             // Updates the summary for the preference
             if (!(preference instanceof CheckBoxPreference)) {
                 String value = sharedPreferences.getString(preference.getKey(), "");
-                Log.d(TAG, "onSharedPreferenceChanged: [" + value.trim() + "]");
+
                 setPreferenceSummary(preference, value);
             }
         }
@@ -88,7 +88,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             }
         } else if (preference instanceof EditTextPreference) {
             EditTextPreference editTextPreference = (EditTextPreference) preference;
-            Log.d(TAG, "setPreferenceSummary: [" + value.trim() + "]");
+
             editTextPreference.setSummary(value);  // Set summary to value stored
         }
     }
