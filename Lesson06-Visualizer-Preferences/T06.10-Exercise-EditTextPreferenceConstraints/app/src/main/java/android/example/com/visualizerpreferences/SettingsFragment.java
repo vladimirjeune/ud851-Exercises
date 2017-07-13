@@ -113,7 +113,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Toast inputErrorToast = Toast.makeText(getContext()
-                , "Please input a value between 1 and 3", Toast.LENGTH_LONG);
+                , "Please input a value between 1 and 3", Toast.LENGTH_SHORT);
         try {
             String size_s = ((String) newValue).trim(); // Will throw Exception if not string, rm spcs.
             Float size_f = Float.parseFloat( size_s );  // Will throw Exception if not a float
