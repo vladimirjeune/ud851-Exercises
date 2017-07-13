@@ -114,20 +114,23 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Toast inputErrorToast = Toast.makeText(getContext()
                 , "Please input a value between 1 and 3", Toast.LENGTH_SHORT);
-        try {
-            String size_s = ((String) newValue).trim(); // Will throw Exception if not string, rm spcs.
-            Float size_f = Float.parseFloat( size_s );  // Will throw Exception if not a float
 
-            float beg_f = 0f;
-            float end_f = 3f;
+        if (preference.getKey().equals(getString(R.string.pref_size_key))) {  // 2X check this is the size preference
+            try {
+                String size_s = ((String) newValue).trim(); // Will throw Exception if not string, rm spcs.
+                Float size_f = Float.parseFloat(size_s);  // Will throw Exception if not a float
 
-            if (((Float.compare(beg_f, size_f)) < 0) && ((Float.compare(end_f, size_f)) >= 0)) {
-                return true;
+                float beg_f = 0f;
+                float end_f = 3f;
+
+                if (((Float.compare(beg_f, size_f)) < 0) && ((Float.compare(end_f, size_f)) >= 0)) {
+                    return true;
+                }
+
+            } catch (Exception e) {
+                inputErrorToast.show();
+                return false;
             }
-
-        } catch (Exception e ) {
-            inputErrorToast.show();
-            return false;
         }
 
         inputErrorToast.show();
