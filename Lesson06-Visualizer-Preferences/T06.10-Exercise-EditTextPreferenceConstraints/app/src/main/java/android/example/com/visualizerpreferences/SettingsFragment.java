@@ -51,7 +51,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 setPreferenceSummary(p, value);
             }
         }
-        // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
+        // TODOne (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
         EditTextPreference editTextPreference = (EditTextPreference) prefScreen
                 .findPreference(getString(R.string.pref_size_key));
         editTextPreference.setOnPreferenceChangeListener(this);
@@ -106,7 +106,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    // TODO (2) Override onPreferenceChange. This method should try to convert the new preference value
+    // TODOne (2) Override onPreferenceChange. This method should try to convert the new preference value
     // to a float; if it cannot, show a helpful error message and return false. If it can be converted
     // to a float check that that float is between 0 (exclusive) and 3 (inclusive). If it isn't, show
     // an error message and return false. If it is a valid number, return true.
