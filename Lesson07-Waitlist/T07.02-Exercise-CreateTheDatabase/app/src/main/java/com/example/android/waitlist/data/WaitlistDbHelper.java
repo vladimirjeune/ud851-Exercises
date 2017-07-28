@@ -16,7 +16,6 @@ public class WaitlistDbHelper extends SQLiteOpenHelper {
                     WaitlistEntry._ID               + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     WaitlistEntry.COLUMN_GUEST_NAME + " TEXT NOT NULL, " +
                     WaitlistEntry.COLUMN_PARTY_SIZE + " INTEGER NOT NULL, " +
-
                     // With DEFAULT as TimeStamp; SQL will put a timestamp in for you
                     WaitlistEntry.COLUMN_TIMESTAMP  + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                     ")";
