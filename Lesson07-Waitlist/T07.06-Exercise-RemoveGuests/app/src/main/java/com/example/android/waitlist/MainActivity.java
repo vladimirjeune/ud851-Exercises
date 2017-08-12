@@ -12,8 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.android.waitlist.data.WaitlistContract;
 import com.example.android.waitlist.data.WaitlistDbHelper;
+
+import static com.example.android.waitlist.data.WaitlistContract.WaitlistEntry;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -57,17 +58,36 @@ public class MainActivity extends AppCompatActivity {
         waitlistRecyclerView.setAdapter(mAdapter);
 
 
-        //TODO (3) Create a new ItemTouchHelper with a SimpleCallback that handles both LEFT and RIGHT swipe directions
+        //TODOne (3) Create a new ItemTouchHelper with a SimpleCallback that handles both LEFT and RIGHT swipe directions
+        int dradDirections = 0;
+        int swipeDirections = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        ItemTouchHelper touchHelper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(dradDirections, swipeDirections) {
 
-        // TODO (4) Override onMove and simply return false inside
+            // TODOne (4) Override onMove and simply return false inside
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder
+                    , RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-        // TODO (5) Override onSwiped
+            // TODOne (5) Override onSwiped
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // TODOne (8) Inside, get the viewHolder's itemView's tag and store in a long variable id
+                long viewId = (long) viewHolder.itemView.getTag();
 
-        // TODO (8) Inside, get the viewHolder's itemView's tag and store in a long variable id
-        // TODO (9) call removeGuest and pass through that id
-        // TODO (10) call swapCursor on mAdapter passing in getAllGuests() as the argument
+                // TODOne (9) call removeGuest and pass through that id
+                removeGuest(viewId);
 
-        //TODO (11) attach the ItemTouchHelper to the waitlistRecyclerView
+                // TODOne (10) call swapCursor on mAdapter passing in getAllGuests() as the argument
+                mAdapter.swapCursor(getAllGuests());
+
+            }
+        });
+
+        //TODOne (11) attach the ItemTouchHelper to the waitlistRecyclerView
+        touchHelper.attachToRecyclerView(waitlistRecyclerView);
 
     }
 
@@ -111,13 +131,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private Cursor getAllGuests() {
         return mDb.query(
-                WaitlistContract.WaitlistEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                WaitlistContract.WaitlistEntry.COLUMN_TIMESTAMP
+                WaitlistEntry.TABLE_NAME,  // Table
+                null,  // Columns
+                null,  // Selection
+                null,  // Selection Args
+                null,  // GroupBy
+                null,  // Having
+                WaitlistEntry.COLUMN_TIMESTAMP  // OrderBy
         );
     }
 
@@ -130,15 +150,20 @@ public class MainActivity extends AppCompatActivity {
      */
     private long addNewGuest(String name, int partySize) {
         ContentValues cv = new ContentValues();
-        cv.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, name);
-        cv.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, partySize);
-        return mDb.insert(WaitlistContract.WaitlistEntry.TABLE_NAME, null, cv);
+        cv.put(WaitlistEntry.COLUMN_GUEST_NAME, name);
+        cv.put(WaitlistEntry.COLUMN_PARTY_SIZE, partySize);
+        return mDb.insert(WaitlistEntry.TABLE_NAME, null, cv);
     }
 
 
-    // TODO (1) Create a new function called removeGuest that takes long id as input and returns a boolean
+    // TODOne (1) Create a new function called removeGuest that takes long id as input and returns a boolean
+    public boolean removeGuest(final long id) {
+        // TODOne (2) Inside, call mDb.delete to pass in the TABLE_NAME and the condition that WaitlistEntry._ID equals id
+        // Any returned value > 0, means that it was successful
+        return (mDb.delete(WaitlistEntry.TABLE_NAME,
+                WaitlistEntry._ID + "=" + id, null)
+                > 0);
 
-    // TODO (2) Inside, call mDb.delete to pass in the TABLE_NAME and the condition that WaitlistEntry._ID equals id
-
+    }
 
 }
