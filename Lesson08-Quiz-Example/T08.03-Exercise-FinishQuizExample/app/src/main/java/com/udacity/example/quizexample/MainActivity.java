@@ -20,15 +20,12 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.udacity.example.droidtermsprovider.DroidTermsExampleContract;
-
-import java.util.ArrayList;
 
 import static com.udacity.example.droidtermsprovider.DroidTermsExampleContract.COLUMN_WORD;
 
@@ -56,12 +53,7 @@ public class MainActivity extends AppCompatActivity {
     // advance the app to the next word
     private final int STATE_SHOWN = 1;
 
-    // This place is the current non-modded page that we are at in the list.  Use getCurrentIndex() to
-    // get a modded index into the list.  You will have to think when it will be reset, if ever.
-    private static int COUNT = 0;
-    private int listSize = 0;
-    private ArrayList<Pair> resultTable = new ArrayList<>();
-
+    private int mWordColumn, mDefinitionColumn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,53 +92,46 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextWord() {
 
-        // Change button text
-        mButton.setText(getString(R.string.show_definition));
+        if (mData != null) {
 
-        // TODO (3) Go to the next word in the Cursor, show the next word and hide the definition
-        // Note that you shouldn't try to do this if the cursor hasn't been set yet.
-        // If you reach the end of the list of words, you should start at the beginning again.
-        incrementPlaceInTable();
-        String nextWord = (String) resultTable.get(getPlaceInTable()).first;
-        mWord.setText(nextWord);
-        mDescription.setVisibility(View.INVISIBLE);
+            // Roll over
+            if (!(mData.moveToNext())) {
+                mData.moveToFirst();
+            }
 
-        String nextDescription = (String) resultTable.get(getPlaceInTable()).second;
-        mDescription.setText(nextDescription);
+            // Change button text
+            mButton.setText(getString(R.string.show_definition));
 
-        mCurrentState = STATE_HIDDEN;
+            // TODO (3) Go to the next word in the Cursor, show the next word and hide the definition
+            // Note that you shouldn't try to do this if the cursor hasn't been set yet.
+            // If you reach the end of the list of words, you should start at the beginning again.
+
+            mWord.setText(mData.getString(mWordColumn));
+            mDescription.setVisibility(View.INVISIBLE);
+
+            mDescription.setText(mData.getString(mDefinitionColumn));
+
+            mCurrentState = STATE_HIDDEN;
+        }
 
     }
 
     public void showDefinition() {
+        if (null != mData) {
+            // Change button text
+            mButton.setText(getString(R.string.next_word));
 
-        // Change button text
-        mButton.setText(getString(R.string.next_word));
-
-        // TODO (4) Show the definition
-        mDescription.setVisibility(View.VISIBLE);
-        mCurrentState = STATE_SHOWN;
-
-    }
-
-    /**
-     * INCREMENTPLACEINTABLE - increases the counter by one.
-     */
-    private void incrementPlaceInTable() {
-        COUNT++;
-    }
-
-    /**
-     * GETPLACEINTABLE - will get the mod of the counter, so that the list will loop over, instead of ending.
-     *
-     * @return Number [0 - size).  Will return 0 if COUNT or listSize are 0
-     */
-    private int getPlaceInTable() {
-        if ((0 == COUNT) || (0 == listSize)) {
-            return 0;
-        } else {
-            return COUNT % listSize;
+            // TODO (4) Show the definition
+            mDescription.setVisibility(View.VISIBLE);
+            mCurrentState = STATE_SHOWN;
         }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mData.close();
     }
 
     // Use an async task to do the data fetch off of the main thread.
@@ -178,32 +163,12 @@ public class MainActivity extends AppCompatActivity {
             // TODO (2) Initialize anything that you need the cursor for, such as setting up
             // the screen with the first word and setting any other instance variables
 
-            int wordColumn       = 0;
-            int definitionColumn = 0;
-            String word          = null;
-            String definition    = null;
-            listSize             = cursor.getCount();
+            mWordColumn       = mData.getColumnIndex(COLUMN_WORD);
+            mDefinitionColumn = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
 
-            boolean firstTime = true;
-            while(cursor.moveToNext()) {
-                wordColumn       = cursor.getColumnIndex(COLUMN_WORD);
-                definitionColumn = cursor.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
-                word             = cursor.getString(wordColumn);
-                definition       = cursor.getString(definitionColumn);
+            // Set initial state
+            nextWord();
 
-                // Set the Sample Word to be the 1st word in this case.
-                if (true == firstTime) {
-                    firstTime = false;
-                    mWord.setText(word);
-                    mDescription.setText(definition);  // Should be invisible to start
-                    mDescription.setVisibility(View.INVISIBLE);
-                }
-
-                resultTable.add(new Pair(word, definition));  // Collect table to work with later
-
-            }
-
-            cursor.close();  // ALWAYS CLOSE THE CURSOR
         }
     }
 
