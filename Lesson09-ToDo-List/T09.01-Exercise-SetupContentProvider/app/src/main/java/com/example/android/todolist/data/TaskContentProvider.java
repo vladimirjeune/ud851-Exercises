@@ -27,7 +27,7 @@ import android.support.annotation.NonNull;
 public class TaskContentProvider extends ContentProvider {
 
 
-    private TaskDbHelper taskDbHelper;
+    private TaskDbHelper mTaskDbHelper;
 
     /* onCreate() is where you should initialize anything you’ll need to setup
     your underlying data source.
@@ -40,7 +40,7 @@ public class TaskContentProvider extends ContentProvider {
         // [Hint] Declare the DbHelper as a global variable
 
         Context context = getContext();
-        taskDbHelper = new TaskDbHelper(context);
+        mTaskDbHelper = new TaskDbHelper(context);
 
         return true;
     }
