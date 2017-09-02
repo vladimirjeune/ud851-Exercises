@@ -19,6 +19,7 @@ package com.example.android.todolist.data;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -26,13 +27,30 @@ import android.support.annotation.NonNull;
 // Verify that TaskContentProvider extends from ContentProvider and implements required methods
 public class TaskContentProvider extends ContentProvider {
 
-    // TODO (1) Define final integer constants for the directory of tasks and a single item.
+    // TODOne (1) Define final integer constants for the directory of tasks and a single item.
     // It's convention to use 100, 200, 300, etc for directories,
     // and related ints (101, 102, ..) for items in that directory.
+    public static int TASK    = 100;
+    public static int TASK_ID = 101;
+    public static String NUMBER = "/#";  // # is wildcard for a number
 
-    // TODO (3) Declare a static variable for the Uri matcher that you construct
+    // TODOne (3) Declare a static variable for the Uri matcher that you construct
+    // Begins with an, 's', because it is static
+    private static final UriMatcher sUriMatcher = buildUriMatcher();
 
-    // TODO (2) Define a static buildUriMatcher method that associates URI's with their int match
+    // TODOne (2) Define a static buildUriMatcher method that associates URI's with their int match
+    private static UriMatcher buildUriMatcher() {
+
+        UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+        // Refers to whole table
+        uriMatcher.addURI(TaskContract.AUTHORITY, TaskContract.PATH_TASKS, TASK);
+
+        // Refers to an _id in table
+        uriMatcher.addURI(TaskContract.AUTHORITY, TaskContract.PATH_TASKS + NUMBER, TASK_ID );
+
+        return uriMatcher;
+    }
 
     // Member variable for a TaskDbHelper that's initialized in the onCreate() method
     private TaskDbHelper mTaskDbHelper;
