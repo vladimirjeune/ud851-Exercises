@@ -17,12 +17,19 @@
 package com.example.android.todolist.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import static com.example.android.todolist.data.TaskContract.AUTHORITY;
+import static com.example.android.todolist.data.TaskContract.PATH_TASKS;
+import static com.example.android.todolist.data.TaskContract.TaskEntry;
 
 // Verify that TaskContentProvider extends from ContentProvider and implements required methods
 public class TaskContentProvider extends ContentProvider {
@@ -51,8 +58,8 @@ public class TaskContentProvider extends ContentProvider {
           For each kind of uri you may want to access, add the corresponding match with addURI.
           The two calls below add matches for the task directory and a single item by ID.
          */
-        uriMatcher.addURI(TaskContract.AUTHORITY, TaskContract.PATH_TASKS, TASKS);
-        uriMatcher.addURI(TaskContract.AUTHORITY, TaskContract.PATH_TASKS + "/#", TASK_WITH_ID);
+        uriMatcher.addURI(AUTHORITY, PATH_TASKS, TASKS);
+        uriMatcher.addURI(AUTHORITY, PATH_TASKS + "/#", TASK_WITH_ID);
 
         return uriMatcher;
     }
@@ -79,15 +86,40 @@ public class TaskContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         // TODO (1) Get access to the task database (to write new data to)
+        final SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
 
         // TODO (2) Write URI matching code to identify the match for the tasks directory
+        final int form = sUriMatcher.match(uri);
+        Uri returnUri = null;
+
+        switch (form) {
+            case TASKS:
+
+                // We will be returning a Uri, so start here
+
+                long id = db.insert(TaskEntry.TABLE_NAME, null, values);
+                if (id > 0) {
+
+                    returnUri = ContentUris.withAppendedId(TaskEntry.CONTENT_URI, id);  // Append id to Content Uri
+                } else {
+                    throw new SQLException("Failed to insert row into " + uri);
+                }
+                break;
+            case TASK_WITH_ID:
+
+                break;
+            default:
+                throw new UnsupportedOperationException("This Uri did not work: " + uri);
+
+        }
+
 
         // TODO (3) Insert new values into the database
         // TODO (4) Set the value for the returnedUri and write the default case for unknown URI's
 
         // TODO (5) Notify the resolver if the uri has been changed, and return the newly inserted URI
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        return returnUri;
     }
 
 
