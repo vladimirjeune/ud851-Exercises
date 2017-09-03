@@ -94,12 +94,12 @@ public class TaskContentProvider extends ContentProvider {
 
         switch (form) {
             case TASKS:
-
+                // TODO (3) Insert new values into the database
                 // We will be returning a Uri, so start here
 
                 long id = db.insert(TaskEntry.TABLE_NAME, null, values);
                 if (id > 0) {
-
+                    // TODO (4) Set the value for the returnedUri and write the default case for unknown URI's
                     returnUri = ContentUris.withAppendedId(TaskEntry.CONTENT_URI, id);  // Append id to Content Uri
                 } else {
                     throw new SQLException("Failed to insert row into " + uri);
@@ -113,11 +113,9 @@ public class TaskContentProvider extends ContentProvider {
 
         }
 
-
-        // TODO (3) Insert new values into the database
-        // TODO (4) Set the value for the returnedUri and write the default case for unknown URI's
-
         // TODO (5) Notify the resolver if the uri has been changed, and return the newly inserted URI
+        // So DB and Views can be updated
+        getContext().getContentResolver().notifyChange(uri, null);
 
         return returnUri;
     }
