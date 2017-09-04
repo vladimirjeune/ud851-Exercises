@@ -26,6 +26,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.example.android.todolist.data.TaskContract.TaskEntry;
+
 import static com.example.android.todolist.data.TaskContract.TaskEntry.TABLE_NAME;
 
 // Verify that TaskContentProvider extends from ContentProvider and implements required methods
@@ -96,7 +98,7 @@ public class TaskContentProvider extends ContentProvider {
                 // Inserting values into tasks table
                 long id = db.insert(TABLE_NAME, null, values);
                 if ( id > 0 ) {
-                    returnUri = ContentUris.withAppendedId(TaskContract.TaskEntry.CONTENT_URI, id);
+                    returnUri = ContentUris.withAppendedId(TaskEntry.CONTENT_URI, id);
                 } else {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
@@ -107,12 +109,22 @@ public class TaskContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
+/*
+        They are used symbiotically. If you are implementing a ContentProvider, essentially
+        when someone queries your provider, you produce a Cursor and call setNotificationUri()
+        on it with some rational Uri (such as the Uri used to make the query). Later, if data
+        served by your ContentProvider changes, e.g. after an insert/update/delete, you call
+        getContentResolver().notifyChange(uri, null) so that anyone who currently has a Cursor
+        (because they queried earlier) gets notified that data has changed and they should re-query.
+        If they are using a CursorLoader, the re-query happens automatically.
+        -- https://stackoverflow.com/questions/40481035/diference-between-cursor-setnotificationuri-and-getcontentresolver-notifycha
+*/
+
         // Notify the resolver if the uri has been changed, and return the newly inserted URI
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Return constructed uri (this points to the newly inserted row of data)
-        return returnUri;
-    }
+        return returnUri;    }
 
 
     // Implement query to handle requests for data by URI
@@ -121,14 +133,33 @@ public class TaskContentProvider extends ContentProvider {
                         String[] selectionArgs, String sortOrder) {
 
         // TODO (1) Get access to underlying database (read-only for query)
+        final SQLiteDatabase db = mTaskDbHelper.getReadableDatabase();
 
         // TODO (2) Write URI match code and set a variable to return a Cursor
+        int match = sUriMatcher.match(uri);
 
+        Cursor retCursor = null;
+
+        switch (match) {
         // TODO (3) Query for the tasks directory and write a default case
+            case TASKS:
+                retCursor = db.query(
+                        TaskEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri " + uri);
+        }
 
         // TODO (4) Set a notification URI on the Cursor and return that Cursor
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        return retCursor;
     }
 
 
