@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 
 import com.example.android.todolist.data.TaskContract.TaskEntry;
@@ -151,17 +152,18 @@ public class MainActivity extends AppCompatActivity implements
                 // TODO (5) Query and load all task data in the background; sort by priority
                 // [Hint] use a try/catch block to catch any errors in loading data
                 try {
-                    mTaskData = getContentResolver().query(
+                    return getContentResolver().query(
                             TaskEntry.CONTENT_URI,
                             null,
                             null,
                             null,
                             TaskEntry.COLUMN_PRIORITY);  // Could be an issue.  RM if causes trouble
                 } catch(Exception ex) {
+                    Log.e(TAG, "Failed to asynchronously load data");
                     ex.printStackTrace();
+                    return null;
                 }
 
-                return mTaskData;
             }
 
             // deliverResult sends the result of the load, a Cursor, to the registered listener
