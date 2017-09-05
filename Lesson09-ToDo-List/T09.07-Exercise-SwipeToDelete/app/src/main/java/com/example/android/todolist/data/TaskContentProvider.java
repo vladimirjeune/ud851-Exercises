@@ -187,12 +187,43 @@ public class TaskContentProvider extends ContentProvider {
         return tasksDeleted;
     }
 
-
+    /**
+     * UPDATE - This updates a single item (by it's ID) in the tasks directory
+     * @param uri
+     * @param values
+     * @param selection
+     * @param selectionArgs
+     * @return number of rows affected
+     */
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        int tasksUpdated = 0;
+        SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
+
+        int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case TASK_WITH_ID:
+
+                long id = ContentUris.parseId(uri);
+
+                tasksUpdated = db.update(TABLE_NAME,
+                        values,
+                        " _id = ? ",
+                        new String[] {""+id});
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        // Notify Resolver of change and return number of rows affected
+        if (tasksUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return tasksUpdated;
     }
 
 
