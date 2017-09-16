@@ -41,7 +41,7 @@ public class NotificationUtils {
 
         // Pass in a unique ID of your choosing for the notification and notificationBuilder.build()
 
-        Notification notification = new NotificationCompat.Builder(context)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.ic_drink_notification)
                 .setLargeIcon(largeIcon(context))
@@ -52,12 +52,12 @@ public class NotificationUtils {
                         .bigText(context.getString(R.string.charging_reminder_notification_body)))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(contentIntent(context))
-                .setAutoCancel(true).build();
+                .setAutoCancel(true);
 
         // TODO (9) If the build version is greater than JELLY_BEAN, set the notification's priority
         // to PRIORITY_HIGH.
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-            notification.priority = Notification.PRIORITY_HIGH;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            notificationBuilder.setPriority(Notification.PRIORITY_HIGH);
         }
 
         // TODO (11) Get a NotificationManager, using context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -65,7 +65,7 @@ public class NotificationUtils {
                 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // TODO (12) Trigger the notification by calling notify on the NotificationManager.
-        notificationManager.notify(DRINK_NOTIFICATION_ID, notification);
+        notificationManager.notify(DRINK_NOTIFICATION_ID, notificationBuilder.build());
     }
 
 
@@ -73,7 +73,7 @@ public class NotificationUtils {
     // TODO (1) Create a helper method called contentIntent with a single parameter for a Context. It
     // should return a PendingIntent. This method will create the pending intent which will trigger when
     // the notification is pressed. This pending intent should open up the MainActivity.
-    public static PendingIntent contentIntent(Context context) {
+    private static PendingIntent contentIntent(Context context) {
         // TODO (2) Create an intent that opens up the MainActivity
         Intent mainIntent = new Intent(context, MainActivity.class);
 
@@ -94,7 +94,7 @@ public class NotificationUtils {
 
     // TODO (4) Create a helper method called largeIcon which takes in a Context as a parameter and
     // returns a Bitmap. This method is necessary to decode a bitmap needed for the notification.
-    public static Bitmap largeIcon(Context context) {
+    private static Bitmap largeIcon(Context context) {
         // TODO (5) Get a Resources object from the context.
         Resources resources = context.getResources();
 
