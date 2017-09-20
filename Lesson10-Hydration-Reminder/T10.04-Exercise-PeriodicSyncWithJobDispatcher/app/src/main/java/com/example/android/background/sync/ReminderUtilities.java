@@ -76,7 +76,7 @@ public class ReminderUtilities {
                 .setLifetime(Lifetime.FOREVER)
                 .setRecurring(true)
                 .setTrigger(Trigger.executionWindow(REMINDER_INTERVAL_SECONDS
-                        , REMINDER_INTERVAL_SECONDS + SYNC_FLEXTIME_SECONDS))
+                        , REMINDER_INTERVAL_SECONDS + SYNC_FLEXTIME_SECONDS))  // FLEXTIME is giving 15M of wiggle room
                 .setReplaceCurrent(true)
                 .build();
 
