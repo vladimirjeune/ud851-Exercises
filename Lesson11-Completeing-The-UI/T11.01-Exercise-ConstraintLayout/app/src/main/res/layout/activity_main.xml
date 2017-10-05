@@ -1,36 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TODO (17) Surround the Constraint layout with a ScrollView -->
-<!-- TODO (2) Replace the Relative layout with a ConstraintLayout -->
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" >
+    <!-- TODO (2) Replace the Relative layout with a ConstraintLayout -->
+    <android.support.constraint.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <!-- TODO (3) Create a TextView for the Passenger label and name -->
-    <!-- TODO (4) Use tool:text to set the text value -->
+        <!-- TODO (3) Create a TextView for the Passenger label and name -->
+        <!-- TODO (4) Use tool:text to set the text value -->
+        <TextView
+            android:id="@+id/tv_passenger_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/passenger_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (5) Create an ImageView for the left rectangle -->
-    <!-- TODO (6) Set the background to the shape_rectangle_stroke drawable -->
+        <TextView
+            android:id="@+id/tv_passenger_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/passenger_name"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (7) Create an ImageView for the divider -->
 
-    <!-- TODO (8) Create an ImageView for the rightRectangle -->
+        <!-- TODO (5) Create an ImageView for the left rectangle -->
+        <!-- TODO (6) Set the background to the shape_rectangle_stroke drawable -->
+        <ImageView
+            android:id="@+id/iv_left_rectangle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rectangle_stroke"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (9) Create a TextView for the origin code, the destination code and the flight code -->
+        <!-- TODO (7) Create an ImageView for the divider -->
+        <ImageView
+            android:id="@+id/iv_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (15) Import the plane image SVG file into the drawable directory and name it art_plane -->
-    <!-- TODO (16) Create an ImageView for the plane and set the background to art_plane drawable -->
+        <!-- TODO (8) Create an ImageView for the rightRectangle -->
+        <ImageView
+            android:id="@+id/iv_right_rectangle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rectangle_stroke"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (10) Create a TextView for the time texts and their corresponding labels -->
+        <!-- TODO (9) Create a TextView for the origin code, the destination code and the flight code -->
+        <TextView
+            android:id="@+id/tv_origin_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/origin_code"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (11) Create an ImageView for the blue table's header -->
+        <TextView
+            android:id="@+id/tv_destination_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/destination_code"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (12) Create an ImageView for the blue table's body -->
+        <TextView
+            android:id="@+id/tv_flight_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/flight_code"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (13) Create a TextView for each of the labels and text fields in the blue table -->
+        <!-- TODO (15) Import the plane image SVG file into the drawable directory and name it art_plane -->
+        <!-- TODO (16) Create an ImageView for the plane and set the background to art_plane drawable -->
+        <ImageView
+            android:id="@+id/iv_plane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/art_plane"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <!-- TODO (14) Create an ImageView for the barcode -->
+        <!-- TODO (10) Create a TextView for the time texts and their corresponding labels -->
+        <TextView
+            android:id="@+id/tv_boarding_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/boarding_time_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_boarding_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/boarding_time"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_boarding_in_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/boarding_in_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_boarding_in_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/boarding_in_time"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_departure_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/departure_time_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_departure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/departure_time"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_arrival_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/arrival_time_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_arrival_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/arrival_time"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <!-- TODO (11) Create an ImageView for the blue table's header -->
+        <ImageView
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <!-- TODO (12) Create an ImageView for the blue table's body -->
+        <ImageView
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <!-- TODO (13) Create a TextView for each of the labels and text fields in the blue table -->
+        <TextView
+            android:id="@+id/tv_terminal_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/terminal_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_terminal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/terminal"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_gate_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/gate_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_gate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/gate"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_seat_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/seat_label"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tv_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/seat"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <!-- TODO (14) Create an ImageView for the barcode -->
+        <ImageView
+            android:id="@+id/iv_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Barcode"
+            android:background="@mipmap/barcode"
+            tools:layout_editor_absoluteY="81dp"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
 
