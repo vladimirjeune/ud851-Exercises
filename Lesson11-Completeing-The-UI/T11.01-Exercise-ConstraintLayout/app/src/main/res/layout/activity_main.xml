@@ -141,7 +141,7 @@
             android:id="@+id/tv_boarding_time_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/boarding_time_label"
+            android:text="@string/boarding_time_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
@@ -154,7 +154,7 @@
             android:id="@+id/tv_boarding_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/boarding_time"
+            tools:text="@string/boarding_time"
             android:textColor="@android:color/black"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_marginLeft="0dp"
@@ -268,7 +268,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_header"
-            app:layout_constraintBottom_toBottomOf="@id/tv_terminal"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_terminal"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.0" />
 
