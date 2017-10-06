@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             tools:text="@string/flight_code"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-            android:textColor="@color/colorPrimaryLight"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@id/iv_divider"
             app:layout_constraintLeft_toRightOf="@id/iv_left_rectangle"
             app:layout_constraintRight_toLeftOf="@id/iv_right_rectangle"
