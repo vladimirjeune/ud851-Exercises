@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO (7) Use a SimpleDateFormat formatter to set the formatted value in time text views
         SimpleDateFormat simpleDateFormatter = new SimpleDateFormat(getString(R.string.timeFormat), Locale.US);
-        String boardingTime = simpleDateFormatter.format(info.boardingTime);
+        String boardingTime = simpleDateFormatter.format(info.boardingTime);  // These are TimeStamps which r Dates
         String departureTime = simpleDateFormatter.format(info.departureTime);
         String arrivalTime = simpleDateFormatter.format(info.arrivalTime);
 
