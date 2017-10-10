@@ -12,6 +12,10 @@ android {
         versionName "1.0"
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +28,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    // TODO (1) Enable Data Binding in your application
+    // TODO (1) Enable Data Binding in your application, site said put under android
 
 }
