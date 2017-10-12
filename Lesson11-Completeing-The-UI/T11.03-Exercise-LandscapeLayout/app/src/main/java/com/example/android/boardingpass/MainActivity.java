@@ -19,6 +19,7 @@ package com.example.android.boardingpass;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.example.android.boardingpass.databinding.ActivityMainBinding;
 import com.example.android.boardingpass.utilities.FakeDataUtils;
@@ -26,6 +27,9 @@ import com.example.android.boardingpass.utilities.FakeDataUtils;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.android.boardingpass.R.id.textViewDestinationAirport;
+import static com.example.android.boardingpass.R.id.textViewFlightCode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,9 +55,18 @@ public class MainActivity extends AppCompatActivity {
 
         mBinding.textViewPassengerName.setText(info.passengerName);
         // TODO (7) Use the flightInfor attribute in mBinding below to get the appropiate text Views
-        mBinding.textViewOriginAirport.setText(info.originCode);
-        mBinding.textViewFlightCode.setText(info.flightCode);
-        mBinding.textViewDestinationAirport.setText(info.destCode);
+        TextView tvOriginAirport
+                = (TextView) mBinding.flightInfo.findViewById(R.id.textViewOriginAirport);
+
+        TextView tvFlightCode
+                = (TextView) mBinding.flightInfo.findViewById(textViewFlightCode);
+
+        TextView tvDestinationAirport
+                = (TextView) mBinding.flightInfo.findViewById(textViewDestinationAirport);
+
+        tvOriginAirport.setText(info.originCode);
+        tvFlightCode.setText(info.flightCode);
+        tvDestinationAirport.setText(info.destCode);
 
         SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.timeFormat), Locale.getDefault());
         String boardingTime = formatter.format(info.boardingTime);
@@ -75,9 +88,20 @@ public class MainActivity extends AppCompatActivity {
 
         mBinding.textViewBoardingInCountdown.setText(hoursAndMinutesUntilBoarding);
         // TODO (8) Use the boardingInfo attribute in mBinding below to get the appropiate text Views
-        mBinding.textViewTerminal.setText(info.departureTerminal);
-        mBinding.textViewGate.setText(info.departureGate);
-        mBinding.textViewSeat.setText(info.seatNumber);
+        TextView tvTerminal
+                = (TextView) mBinding.boardingInfo.findViewById(R.id.textViewTerminal);
+
+        TextView tvGate
+                = (TextView) mBinding.boardingInfo.findViewById(R.id.textViewGate);
+
+        TextView tvSeat
+                = (TextView) mBinding.boardingInfo.findViewById(R.id.textViewSeat);
+
+
+
+        tvTerminal.setText(info.departureTerminal);
+        tvGate.setText(info.departureGate);
+        tvSeat.setText(info.seatNumber);
     }
 }
 
