@@ -39,8 +39,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp" >
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -49,8 +52,6 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:paddingBottom="4dp"/>
 
         <TextView
@@ -60,9 +61,7 @@
             android:text="@string/sample_date"
             android:textSize="20sp"
             android:textColor="@android:color/darker_gray"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"/>
+            />
 
 
         <TextView
@@ -72,8 +71,6 @@
             android:text="@string/sample_body_text"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             />
     </LinearLayout>
 </LinearLayout>
