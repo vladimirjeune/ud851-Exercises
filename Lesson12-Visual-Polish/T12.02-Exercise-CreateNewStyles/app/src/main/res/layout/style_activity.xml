@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:orientation="vertical"
@@ -16,59 +17,38 @@
 
     <!-- TODO (5) Apply the "inboxStyle" to the inbox text view -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawablePadding="8dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         android:drawableStart="@drawable/ic_inbox"
         android:drawableLeft="@drawable/ic_inbox"
-        android:textSize="28sp"
-        android:textColor="@android:color/black"
-        android:text="@string/inbox" />
+        android:text="@string/inbox"
+        style="@style/inBoxStyle"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_star"
         android:drawableLeft="@drawable/ic_star"
-        android:textSize="28sp"
-        android:textColor="@android:color/black"
-        android:text="@string/starred" />
+        android:text="@string/starred"
+        style="@style/folderStyle"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawablePadding="8dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         android:drawableStart="@drawable/ic_drafts"
         android:drawableLeft="@drawable/ic_drafts"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:text="@string/drafts" />
+        android:text="@string/drafts"
+        style="@style/folderStyle"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         android:drawableStart="@drawable/ic_sent"
         android:drawableLeft="@drawable/ic_sent"
-        android:textSize="28sp"
-        android:textColor="@android:color/black"
-        android:text="@string/sent" />
+        android:text="@string/sent"
+        style="@style/folderStyle"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawablePadding="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
         android:drawableStart="@drawable/ic_trash"
         android:drawableLeft="@drawable/ic_trash"
-        android:textSize="28sp"
-        android:textColor="@android:color/black"
-        android:text="@string/trash" />
+        android:text="@string/trash"
+        style="@style/folderStyle"
+        />
 
 </LinearLayout>
